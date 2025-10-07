@@ -91,28 +91,16 @@
       }
     </style>
   </head>
-  <body>
-    <div class="card">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
-        alt="YouTube"
-        class="logo"
-      />
-      <h3>YouTube URL Grabber</h3>
-      <button id="getUrl" >Open</button>
-    </div>
+ <body>
+  <div class="card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube" class="logo" />
+    <h3>YouTube URL Grabber</h3>
+    <button id="getUrl">Open</button>
+    <p id="result"></p>
+  </div>
 
-    <footer>Made with ❤️ for creators</footer>
+  <footer>Made with ❤️ for creators</footer>
 
-    <script>
-      document.getElementById("getUrl").addEventListener("click", async () => {
-        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-        if (tab && tab.url.includes("youtube.com/watch")) {
-          window.open(tab.url, "_blank");
-        } else {
-          alert("No YouTube video found on this tab.");
-        }
-      });
-    </script>
+  <script src="popup.js"></script>
   </body>
 </html>

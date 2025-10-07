@@ -1,3 +1,4 @@
+// popup.js
 document.getElementById("getUrl").addEventListener("click", async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
@@ -13,19 +14,17 @@ document.getElementById("getUrl").addEventListener("click", async () => {
   const resultEl = document.getElementById("result");
 
   if (ytEmbedUrl) {
-    // Extract the video ID from the embed URL
     const videoId = ytEmbedUrl.match(/embed\/([a-zA-Z0-9_-]+)/)?.[1];
     if (videoId) {
-      // Make a mobile YouTube deep link
       const mobileLink = `vnd.youtube://${videoId}`;
       const webLink = `https://www.youtube.com/watch?v=${videoId}`;
 
       resultEl.textContent = `Opening video: ${webLink}`;
 
-      // Try to open in YouTube app (Android deep link)
+      // Try YouTube app first
       window.location.href = mobileLink;
 
-      // As a fallback, open in normal YouTube website if app not found
+      // Fallback: open in web after 1 second
       setTimeout(() => {
         window.open(webLink, "_blank");
       }, 1000);
